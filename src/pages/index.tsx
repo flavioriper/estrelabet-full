@@ -25,6 +25,7 @@ const Index = () => {
 
   return (
     <div className="flex flex-row gap-5">
+      <div className="hidden bg-slate-400 text-white text-blue-500 text-purple-500 bg-green-200 text-pink-500" />
       <div>
         <Results data={results} />
       </div>

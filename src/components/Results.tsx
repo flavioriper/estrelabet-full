@@ -1,3 +1,7 @@
+import classNames from 'classnames';
+
+import { getLast } from '@/utils/getColors';
+
 const Results = ({ data }: any) => {
   return (
     <table className="table-auto border-collapse border border-slate-400">
@@ -48,7 +52,9 @@ const Results = ({ data }: any) => {
         </tr>
         {data.map(({ id, numericResult, time }: any) => (
           <tr key={id}>
-            <td className="border border-slate-300 py-1 px-3 text-center">{numericResult}</td>
+            <td className={classNames('border border-slate-300 py-1 px-3 text-center', getLast(numericResult))}>
+              {numericResult}
+            </td>
             <td className="border border-slate-300 py-1 px-3 text-center">8</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
             <td className="border border-slate-300 py-1 px-3 text-center"></td>
