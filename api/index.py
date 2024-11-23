@@ -20,5 +20,15 @@ app.add_middleware(
 
 @app.get("/api/py/tipminer")
 def read():
-    data = web_scraping(f"https://www.tipminer.com/historico/estrelabet/aviator?subject=highlight&limit=1000&t=1731206893098")
-    return data[0]
+    response = web_scraping(f"https://www.tipminer.com/historico/estrelabet/aviator?subject=highlight&limit=1000&t=1731206893098")
+    new_value = response.pop(0)
+
+    if new_value["numericResult"] >= 10:
+        new_value["distance"] = 0
+        for value in response:
+            if value["numericResult"] < 10:
+                new_value["distance"] = new_value["distance"] + 1
+            else:
+                break
+
+    return new_value
