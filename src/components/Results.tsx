@@ -1,10 +1,28 @@
 import classNames from 'classnames';
 
+import type { IResult } from '@/types';
+
+import Spinner from './Spinner';
+
 import { getLast } from '@/utils/getColors';
 
-const Results = ({ data }: any) => {
-  const lasts = data.filter(({ numericResult }: any) => numericResult >= 10).slice(0, 7);
+type Types = {
+  data: IResult[];
+};
+
+const Results = ({ data }: Types) => {
+  const lasts = data
+    .filter(({ numericResult }) => numericResult >= 10)
+    .slice(0, 7)
+    .reverse();
   const valueCheck = 2.3;
+
+  if (data.length === 0)
+    return (
+      <div className="m-3">
+        <Spinner />
+      </div>
+    );
 
   return (
     <table className="table-auto border-collapse border border-slate-400">
@@ -47,10 +65,10 @@ const Results = ({ data }: any) => {
           </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
-            {data.filter(({ green }: any) => green).length}
+            {data.filter(({ green }) => green).length}
           </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
-            {data.filter(({ green }: any) => !green).length}
+            {data.filter(({ green }) => !green).length}
           </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
@@ -59,7 +77,7 @@ const Results = ({ data }: any) => {
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
         </tr>
-        {data.map(({ id, numericResult, time, distance, green }: any) => (
+        {data.map(({ id, numericResult, time, distance, green }) => (
           <tr key={id}>
             <td
               className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
