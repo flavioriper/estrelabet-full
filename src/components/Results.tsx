@@ -4,6 +4,7 @@ import { getLast } from '@/utils/getColors';
 
 const Results = ({ data }: any) => {
   const lasts = data.filter(({ numericResult }: any) => numericResult >= 10).slice(0, 7);
+  const valueCheck = 2.3;
 
   return (
     <table className="table-auto border-collapse border border-slate-400">
@@ -22,14 +23,16 @@ const Results = ({ data }: any) => {
         </tr>
       </thead>
       <tbody>
-        {lasts.map(({ id, numericResult, time, distance }: any) => (
+        {lasts.map(({ id, numericResult, time, distance, green }: any) => (
           <tr key={id}>
-            <td className={classNames('border border-slate-300 py-1 px-3 text-center', getLast(numericResult))}>
-              {numericResult}
+            <td
+              className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
+            >
+              {numericResult.toFixed(2)}
             </td>
             <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center"></td>
-            <td className="border border-slate-300 py-1 px-3 text-center"></td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{green ? 'G' : ''}</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{green ? '' : 'R'}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{distance}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">66%</td>
             <td className="border border-slate-300 py-1 px-3 text-center">57%</td>
@@ -39,10 +42,16 @@ const Results = ({ data }: any) => {
           </tr>
         ))}
         <tr>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">0,00</td>
+          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
+            {valueCheck.toFixed(2)}
+          </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">0</td>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">0</td>
+          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
+            {data.filter(({ green }: any) => green).length}
+          </td>
+          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
+            {data.filter(({ green }: any) => !green).length}
+          </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
@@ -50,14 +59,16 @@ const Results = ({ data }: any) => {
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
         </tr>
-        {data.map(({ id, numericResult, time, distance }: any) => (
+        {data.map(({ id, numericResult, time, distance, green }: any) => (
           <tr key={id}>
-            <td className={classNames('border border-slate-300 py-1 px-3 text-center', getLast(numericResult))}>
-              {numericResult}
+            <td
+              className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
+            >
+              {numericResult.toFixed(2)}
             </td>
             <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center"></td>
-            <td className="border border-slate-300 py-1 px-3 text-center"></td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{green ? 'G' : ''}</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{green ? '' : 'R'}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{distance}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">66%</td>
             <td className="border border-slate-300 py-1 px-3 text-center">57%</td>

@@ -12,6 +12,7 @@ const Index = () => {
     });
 
     const data = await response.json();
+    data.green = data.numericResult > 2.3;
     setResults((value: any) => (value.find(({ id }: any) => id === data.id) ? value : [data, ...value]));
   };
 
