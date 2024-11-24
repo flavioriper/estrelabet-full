@@ -1,51 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import Results from '@/components/Results';
-// import Setup from '@/components/Setup';
-
-import type { IResult } from '@/types';
+import Button from '@/components/Button';
+import Game from '@/components/Game';
 
 const Index = () => {
-  const [results, setResults]: any = useState([]);
-
-  const fetchAllData = async () => {
-    const response = await fetch('api/py/tipminer/all', {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    });
-
-    const data = await response.json();
-    setResults(data.map((result: IResult) => ({ ...result, green: result.numericResult > 2.3 })));
-  };
-
-  const fetchIntervalData = async () => {
-    const response = await fetch('api/py/tipminer/last', {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    });
-
-    const data = await response.json();
-    data.green = data.numericResult > 2.3;
-    setResults((value: IResult[]) => (value.find(({ id }) => id === data.id) ? value : [data, ...value]));
-  };
-
-  useEffect(() => {
-    fetchAllData();
-
-    const interval = setInterval(() => {
-      fetchIntervalData();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const [game, setGame]: any = useState('estrelabet');
 
   return (
-    <div className="flex flex-row gap-5">
+    <div className="flex flex-col gap-5">
       <div className="hidden bg-slate-400 text-white text-blue-500 text-purple-500 bg-green-200 text-pink-500" />
-      <div>
-        <Results data={results} />
+
+      <div className="flex flex-row gap-5 m-4">
+        <Button selected={game === 'estrelabet'} onClick={() => setGame('estrelabet')}>
+          EST
+        </Button>
+        <Button selected={game === 'betfair'} onClick={() => setGame('betfair')}>
+          FAIR
+        </Button>
+        <Button selected={game === 'betnacional'} onClick={() => setGame('betnacional')}>
+          NAC
+        </Button>
+        <Button selected={game === 'b2xbet'} onClick={() => setGame('b2xbet')}>
+          PLAY
+        </Button>
       </div>
-      {/* <div>
-        <Setup />
-      </div> */}
+
+      {game === 'estrelabet' && <Game game="estrelabet" />}
+      {game === 'betfair' && <Game game="betfair" />}
+      {game === 'betnacional' && <Game game="betnacional" />}
+      {game === 'b2xbet' && <Game game="b2xbet" />}
     </div>
   );
 };

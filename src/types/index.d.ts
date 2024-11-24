@@ -7,3 +7,5 @@ export type IResult = {
   distance?: number;
   green?: boolean;
 };
+
+export type IGame = 'estrelabet' | 'betfair' | 'betnacional' | 'b2xbet';

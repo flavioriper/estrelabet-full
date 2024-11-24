@@ -19,8 +19,8 @@ app.add_middleware(
 )
 
 @app.get("/api/py/tipminer/all")
-def read_all():
-    response = web_scraping(f"https://www.tipminer.com/historico/estrelabet/aviator?subject=highlight&limit=1000&t=1731206893098")
+def read_all(game = 'estrelabet'):
+    response = web_scraping(f"https://www.tipminer.com/historico/{game}/aviator?subject=highlight&limit=1000&t=1731206893098")
     new_collection = []
 
     while len(response) > 0:
@@ -39,8 +39,8 @@ def read_all():
     return new_collection
 
 @app.get("/api/py/tipminer/last")
-def read_last():
-    response = web_scraping(f"https://www.tipminer.com/historico/estrelabet/aviator?subject=highlight&limit=1000&t=1731206893098")
+def read_last(game = 'estrelabet'):
+    response = web_scraping(f"https://www.tipminer.com/historico/{game}/aviator?subject=highlight&limit=1000&t=1731206893098")
     new_value = response.pop(0)
 
     if new_value["numericResult"] >= 10:
