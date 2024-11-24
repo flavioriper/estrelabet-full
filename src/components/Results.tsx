@@ -41,7 +41,7 @@ const Results = ({ data }: Types) => {
         </tr>
       </thead>
       <tbody>
-        {lasts.map(({ id, numericResult, time, distance, green }: any) => (
+        {lasts.map(({ id, average_2, average_5, average_7, average_total, numericResult, time, distance, green }) => (
           <tr key={id}>
             <td
               className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
@@ -51,11 +51,11 @@ const Results = ({ data }: Types) => {
             <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{green ? 'G' : ''}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{green ? '' : 'R'}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{distance}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">66%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">57%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">57%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">60%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center font-bold">{distance}</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_2 * 100)}%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_5 * 100)}%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_7 * 100)}%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_total * 100)}%</td>
             <td className="border border-slate-300 py-1 px-3 text-center"></td>
           </tr>
         ))}
@@ -77,7 +77,7 @@ const Results = ({ data }: Types) => {
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
         </tr>
-        {data.map(({ id, numericResult, time, distance, green }) => (
+        {data.map(({ id, average_2, average_5, average_7, average_total, numericResult, time, distance, green }) => (
           <tr key={id}>
             <td
               className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
@@ -87,11 +87,11 @@ const Results = ({ data }: Types) => {
             <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{green ? 'G' : ''}</td>
             <td className="border border-slate-300 py-1 px-3 text-center">{green ? '' : 'R'}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{distance}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">66%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">57%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">57%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">60%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center font-bold">{distance}</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_2 * 100)}%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_5 * 100)}%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_7 * 100)}%</td>
+            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_total * 100)}%</td>
             <td className="border border-slate-300 py-1 px-3 text-center"></td>
           </tr>
         ))}

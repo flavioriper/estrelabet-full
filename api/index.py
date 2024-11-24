@@ -25,6 +25,36 @@ def read_all(game = 'estrelabet'):
 
     while len(response) > 0:
         new_value = response.pop(0)
+        average = 0
+
+        new_value["average_2"] = 0
+        new_value["average_5"] = 0
+        new_value["average_7"] = 0
+        new_value["average_total"] = 0
+
+        if new_value["numericResult"] > 2.3:
+            average = average + 1
+        
+        for i in range(1, 8):
+            if len(response) < 7:
+                new_value["average_2"] = 0
+                new_value["average_5"] = 0
+                new_value["average_7"] = 0
+                break
+
+            if response[i - 1]["numericResult"] > 2.3:
+                average = average + 1
+
+            if i == 1:
+                new_value["average_2"] = average / 2
+
+            if i == 4:
+                new_value["average_5"] = average / 5
+
+            if i == 6:
+                new_value["average_7"] = average / 7
+
+        new_value["average_total"] = (new_value["average_2"] + new_value["average_5"] + new_value["average_7"]) / 3
 
         if new_value["numericResult"] >= 10:
             new_value["distance"] = 1
@@ -42,6 +72,36 @@ def read_all(game = 'estrelabet'):
 def read_last(game = 'estrelabet'):
     response = web_scraping(f"https://www.tipminer.com/historico/{game}/aviator?subject=highlight&limit=1000&t=1731206893098")
     new_value = response.pop(0)
+    average = 0
+
+    new_value["average_2"] = 0
+    new_value["average_5"] = 0
+    new_value["average_7"] = 0
+    new_value["average_total"] = 0
+
+    if new_value["numericResult"] > 2.3:
+        average = average + 1
+    
+    for i in range(1, 8):
+        if len(response) < 7:
+            new_value["average_2"] = 0
+            new_value["average_5"] = 0
+            new_value["average_7"] = 0
+            break
+
+        if response[i - 1]["numericResult"] > 2.3:
+            average = average + 1
+
+        if i == 1:
+            new_value["average_2"] = average / 2
+
+        if i == 4:
+            new_value["average_5"] = average / 5
+
+        if i == 6:
+            new_value["average_7"] = average / 7
+
+    new_value["average_total"] = (new_value["average_2"] + new_value["average_5"] + new_value["average_7"]) / 3
 
     if new_value["numericResult"] >= 10:
         new_value["distance"] = 1
