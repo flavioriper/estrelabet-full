@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Results from '@/components/Results';
-import Setup from '@/components/Setup';
+// import Setup from '@/components/Setup';
 
 const Index = () => {
   const [results, setResults]: any = useState([]);
@@ -29,9 +29,9 @@ const Index = () => {
       <div>
         <Results data={results} />
       </div>
-      <div>
+      {/* <div>
         <Setup />
-      </div>
+      </div> */}
     </div>
   );
 };
