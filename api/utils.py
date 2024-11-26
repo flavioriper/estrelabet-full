@@ -30,6 +30,9 @@ def mutate_list(data):
         new_value = data.pop(0)
 
         new_value["alarm"] = False
+        new_value["green"] = False
+        new_value["pink"] = False
+        new_value["red"] = False
 
         if new_value["numericResult"] <= 2.3:
             new_value["red"] = True
@@ -58,11 +61,15 @@ def mutate_list(data):
         if "distance" in new_value and new_value["distance"] <= 9 and rounds < 5:
             rounds = rounds + 1
             new_value["alarm"] = True
+            
         elif rounds > 0 and rounds < 5:
             rounds = rounds + 1
             new_value["alarm"] = True
         else:
             rounds = 0
+            new_value["green"] = False
+            new_value["pink"] = False
+            new_value["red"] = False
 
         response_collection.append(new_value)
 
