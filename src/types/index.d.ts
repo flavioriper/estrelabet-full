@@ -5,10 +5,10 @@ export type IResult = {
   alarm: boolean;
   numericResult: number;
   time: string;
-  average_total: number;
-  average_7: number;
   distance?: number;
   green?: boolean;
+  pink?: boolean;
+  red?: boolean;
 };
 
 export type IGame = 'EST' | 'FAIR' | 'NAC' | 'PLAY';

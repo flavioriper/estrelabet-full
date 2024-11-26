@@ -27,29 +27,17 @@ def mutate_list(data):
 
     while len(data) > 0:
         new_value = data.pop(0)
-        average = 0
 
         new_value["alarm"] = False
-        new_value["average_7"] = 0
-        new_value["average_total"] = 0
+
+        if new_value["numericResult"] <= 2.3:
+            new_value["red"] = True
 
         if new_value["numericResult"] > 2.3:
-            average = average + 1
-        
-        for i in range(1, 8):
-            if len(data) < 7:
-                new_value["average_7"] = 0
-                break
-
-            if data[i - 1]["numericResult"] > 2.3:
-                average = average + 1
-
-            if i == 6:
-                new_value["average_7"] = average / 7
-
-        new_value["average_total"] = (new_value["average_7"]) / 1
+            new_value["green"] = True
 
         if new_value["numericResult"] >= 10:
+            new_value["pink"] = True
             new_value["distance"] = 1
             for value in data:
                 if value["numericResult"] < 10:

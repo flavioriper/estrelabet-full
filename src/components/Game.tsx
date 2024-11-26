@@ -13,7 +13,7 @@ const Game = ({ game = 'EST' }: { game: IGame }) => {
     });
 
     const data = await response.json();
-    setResults(data.map((result: IResult) => ({ ...result, green: result.numericResult > 2.3 })));
+    setResults(data);
   };
 
   const fetchIntervalData = async () => {
@@ -23,7 +23,6 @@ const Game = ({ game = 'EST' }: { game: IGame }) => {
 
     const data = await response.json();
     if (data.id) {
-      data.green = data.numericResult > 2.3;
       setResults((value: IResult[]) => (value.find(({ id }) => id === data.id) ? value : [data, ...value]));
     }
   };

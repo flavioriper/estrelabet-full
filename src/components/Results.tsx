@@ -31,10 +31,6 @@ const Results = ({ data }: Types) => {
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">Pink</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">Red</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">D10</th>
-          <th className="border border-slate-300 bg-slate-200 py-1 px-3">%RV</th>
-          <th className="border border-slate-300 bg-slate-200 py-1 px-3">%RV</th>
-          <th className="border border-slate-300 bg-slate-200 py-1 px-3">%RV</th>
-          <th className="border border-slate-300 bg-slate-200 py-1 px-3">%</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">Alarme</th>
         </tr>
       </thead>
@@ -49,15 +45,11 @@ const Results = ({ data }: Types) => {
             {data.filter(({ green }) => green).length}
           </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
-            {data.filter(({ green }) => green).length}
+            {data.filter(({ pink }) => pink).length}
           </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
-            {data.filter(({ green }) => !green).length}
+            {data.filter(({ red }) => red).length}
           </td>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
-          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
         </tr>
