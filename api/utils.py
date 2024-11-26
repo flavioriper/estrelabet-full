@@ -58,11 +58,10 @@ def mutate_list(data):
     while len(new_collection) > 0:
         new_value = new_collection.pop(0)
         
-        if "distance" in new_value and new_value["distance"] <= 9 and rounds < 5:
+        if "distance" in new_value and new_value["distance"] <= 9 and rounds < 6:
             rounds = rounds + 1
-            new_value["alarm"] = True
             
-        elif rounds > 0 and rounds < 5:
+        elif rounds > 0 and rounds < 6:
             rounds = rounds + 1
             new_value["alarm"] = True
         else:
