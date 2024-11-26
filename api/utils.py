@@ -24,6 +24,7 @@ def start_fetch_results():
 
 def mutate_list(data):
     new_collection = []
+    response_collection = []
 
     while len(data) > 0:
         new_value = data.pop(0)
@@ -39,6 +40,7 @@ def mutate_list(data):
         if new_value["numericResult"] >= 10:
             new_value["pink"] = True
             new_value["distance"] = 1
+
             for value in data:
                 if value["numericResult"] < 10:
                     new_value["distance"] = new_value["distance"] + 1
@@ -47,4 +49,23 @@ def mutate_list(data):
 
         new_collection.append(new_value)
 
-    return new_collection
+    new_collection.reverse()
+    rounds = 0
+
+    while len(new_collection) > 0:
+        new_value = new_collection.pop(0)
+        
+        if "distance" in new_value and new_value["distance"] <= 9 and rounds < 5:
+            rounds = rounds + 1
+            new_value["alarm"] = True
+        elif rounds > 0 and rounds < 5:
+            rounds = rounds + 1
+            new_value["alarm"] = True
+        else:
+            rounds = 0
+
+        response_collection.append(new_value)
+
+    response_collection.reverse()
+
+    return response_collection

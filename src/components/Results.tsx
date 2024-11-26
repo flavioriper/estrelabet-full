@@ -12,7 +12,7 @@ const Results = ({ data }: Types) => {
     .filter(({ numericResult }) => numericResult >= 10)
     .slice(0, 7)
     .reverse();
-  const valueCheck = 2.3;
+  const valueCheck = 10;
 
   if (data.length === 0)
     return (
