@@ -28,6 +28,8 @@ def web_scraping(path: str):
         timeout=None
     )
 
+    # print("CHECK HEALTH", response.status_code, path)
+
     for line in response.iter_lines():
         if line:
             line_decoded = line.decode("utf-8")

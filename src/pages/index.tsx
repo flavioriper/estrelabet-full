@@ -4,31 +4,31 @@ import Button from '@/components/Button';
 import Game from '@/components/Game';
 
 const Index = () => {
-  const [game, setGame]: any = useState('estrelabet');
+  const [game, setGame]: any = useState('EST');
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 max-w-[750px]">
       <div className="hidden bg-slate-400 text-white text-blue-500 text-purple-500 bg-green-200 text-pink-500" />
 
-      <div className="flex flex-row gap-5 m-4">
-        <Button selected={game === 'estrelabet'} onClick={() => setGame('estrelabet')}>
+      <div className="flex flex-row w-full justify-between gap-5 my-4">
+        <Button selected={game === 'EST'} onClick={() => setGame('EST')}>
           EST
         </Button>
-        <Button selected={game === 'betfair'} onClick={() => setGame('betfair')}>
+        <Button selected={game === 'FAIR'} onClick={() => setGame('FAIR')}>
           FAIR
         </Button>
-        <Button selected={game === 'betnacional'} onClick={() => setGame('betnacional')}>
+        <Button selected={game === 'NAC'} onClick={() => setGame('NAC')}>
           NAC
         </Button>
-        <Button selected={game === 'b2xbet'} onClick={() => setGame('b2xbet')}>
+        <Button selected={game === 'PLAY'} onClick={() => setGame('PLAY')}>
           PLAY
         </Button>
       </div>
 
-      {game === 'estrelabet' && <Game game="estrelabet" />}
-      {game === 'betfair' && <Game game="betfair" />}
-      {game === 'betnacional' && <Game game="betnacional" />}
-      {game === 'b2xbet' && <Game game="b2xbet" />}
+      {game === 'EST' && <Game game="EST" />}
+      {game === 'FAIR' && <Game game="FAIR" />}
+      {game === 'NAC' && <Game game="NAC" />}
+      {game === 'PLAY' && <Game game="PLAY" />}
     </div>
   );
 };

@@ -1,10 +1,7 @@
-import classNames from 'classnames';
-
 import type { IResult } from '@/types';
 
+import Result from './Result';
 import Spinner from './Spinner';
-
-import { getLast } from '@/utils/getColors';
 
 type Types = {
   data: IResult[];
@@ -30,8 +27,9 @@ const Results = ({ data }: Types) => {
         <tr>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">Vela</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">Hora</th>
-          <th className="border border-slate-300 bg-slate-200 py-1 px-3">G</th>
-          <th className="border border-slate-300 bg-slate-200 py-1 px-3">R</th>
+          <th className="border border-slate-300 bg-slate-200 py-1 px-3">Green</th>
+          <th className="border border-slate-300 bg-slate-200 py-1 px-3">Pink</th>
+          <th className="border border-slate-300 bg-slate-200 py-1 px-3">Red</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">D10</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">%RV</th>
           <th className="border border-slate-300 bg-slate-200 py-1 px-3">%RV</th>
@@ -41,29 +39,15 @@ const Results = ({ data }: Types) => {
         </tr>
       </thead>
       <tbody>
-        {lasts.map(({ id, average_2, average_5, average_7, average_total, numericResult, time, distance, green }) => (
-          <tr key={id}>
-            <td
-              className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
-            >
-              {numericResult.toFixed(2)}
-            </td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{green ? 'G' : ''}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{green ? '' : 'R'}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center font-bold">{distance}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_2 * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_5 * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_7 * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_total * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center"></td>
-          </tr>
-        ))}
+        <Result data={lasts} />
         <tr>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
             {valueCheck.toFixed(2)}
           </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
+          <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
+            {data.filter(({ green }) => green).length}
+          </td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white">
             {data.filter(({ green }) => green).length}
           </td>
@@ -77,24 +61,7 @@ const Results = ({ data }: Types) => {
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
           <td className="border border-slate-300 py-1 px-3 text-center bg-red-500 text-white"></td>
         </tr>
-        {data.map(({ id, average_2, average_5, average_7, average_total, numericResult, time, distance, green }) => (
-          <tr key={id}>
-            <td
-              className={classNames('border border-slate-300 py-1 px-3 text-center font-bold', getLast(numericResult))}
-            >
-              {numericResult.toFixed(2)}
-            </td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{time}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{green ? 'G' : ''}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{green ? '' : 'R'}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center font-bold">{distance}</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_2 * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_5 * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_7 * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center">{Math.round(average_total * 100)}%</td>
-            <td className="border border-slate-300 py-1 px-3 text-center"></td>
-          </tr>
-        ))}
+        <Result data={data} />
       </tbody>
     </table>
   );

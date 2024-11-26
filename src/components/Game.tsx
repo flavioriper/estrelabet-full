@@ -4,7 +4,7 @@ import Results from '@/components/Results';
 
 import type { IGame, IResult } from '@/types';
 
-const Game = ({ game = 'estrelabet' }: { game: IGame }) => {
+const Game = ({ game = 'EST' }: { game: IGame }) => {
   const [results, setResults]: any = useState([]);
 
   const fetchAllData = async () => {
@@ -22,8 +22,10 @@ const Game = ({ game = 'estrelabet' }: { game: IGame }) => {
     });
 
     const data = await response.json();
-    data.green = data.numericResult > 2.3;
-    setResults((value: IResult[]) => (value.find(({ id }) => id === data.id) ? value : [data, ...value]));
+    if (data.id) {
+      data.green = data.numericResult > 2.3;
+      setResults((value: IResult[]) => (value.find(({ id }) => id === data.id) ? value : [data, ...value]));
+    }
   };
 
   useEffect(() => {
@@ -36,11 +38,7 @@ const Game = ({ game = 'estrelabet' }: { game: IGame }) => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div>
-      <Results data={results} />
-    </div>
-  );
+  return <Results data={results} />;
 };
 
 export default Game;
