@@ -34,14 +34,7 @@ def mutate_list(data):
         new_value["pink"] = False
         new_value["red"] = False
 
-        if new_value["numericResult"] <= 2.3:
-            new_value["red"] = True
-
-        if new_value["numericResult"] > 2.3:
-            new_value["green"] = True
-
         if new_value["numericResult"] >= 10:
-            new_value["pink"] = True
             new_value["distance"] = 1
 
             for value in data:
@@ -54,21 +47,32 @@ def mutate_list(data):
 
     new_collection.reverse()
     rounds = 0
+    red_rounds = 0
 
     while len(new_collection) > 0:
         new_value = new_collection.pop(0)
         
         if "distance" in new_value and new_value["distance"] <= 9 and rounds < 6:
             rounds = rounds + 1
-            
+            new_value["alarm"] = True
         elif rounds > 0 and rounds < 6:
             rounds = rounds + 1
             new_value["alarm"] = True
         else:
             rounds = 0
-            new_value["green"] = False
-            new_value["pink"] = False
-            new_value["red"] = False
+
+        if rounds > 1 or red_rounds > 0:
+            if new_value["numericResult"] < 10:
+                new_value["red"] = True
+                red_rounds = red_rounds + 1
+
+            if new_value["numericResult"] >= 10:
+                new_value["green"] = True
+                red_rounds = 0
+
+            if red_rounds == 23:
+                new_value["pink"] = True
+                red_rounds = 0
 
         response_collection.append(new_value)
 
